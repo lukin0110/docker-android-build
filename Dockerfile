@@ -55,18 +55,27 @@ RUN cd /usr/local && \
 RUN rm -f android-ndk-r10e-linux-x86_64.bin
 ENV ANDROID_NDK_HOME /usr/local/android-ndk-r10e
 
+
 # Install Gradle
-#TODO
+RUN cd /usr/local && \
+    curl -L https://services.gradle.org/distributions/gradle-2.5-bin.zip -o gradle-2.5-bin.zip && \
+    unzip gradle-2.5-bin.zip
+ENV GRADLE_HOME=/usr/local/gradle-2.5
 
 
 # Set PATH
 #ENV ANT_HOME /usr/local/apache-ant-1.9.2
 #ENV MAVEN_HOME /usr/local/apache-maven-3.1.1
-#ENV GRADLE_HOME /usr/local/gradle-1.9
 #ENV PATH $PATH:$ANT_HOME/bin
 #ENV PATH $PATH:$MAVEN_HOME/bin
-#ENV PATH $PATH:$GRADLE_HOME/bin
-ENV PATH $PATH:$ANDROID_HOME/tools:$ANDROID_NDK_HOME/platform-tools:$ANDROID_NDK_HOME
+ENV PATH $PATH:$ANDROID_HOME/tools:$ANDROID_NDK_HOME/platform-tools:$ANDROID_NDK_HOME:$GRADLE_HOME/bin
+
+
+# Flatten the image
+# https://intercityup.com/blog/downsizing-docker-containers.html
+# Cleaning APT
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
 # Define working directory.

@@ -22,6 +22,6 @@ TODO
 ----
 
 * android tools
-* gradle
 * tagging, tagging strategy
+* flatten image
 * document howto, example use for android
