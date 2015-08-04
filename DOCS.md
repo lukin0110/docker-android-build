@@ -29,5 +29,8 @@ git push origin --tags
 
 * example use for android
 * explain mounting
+* include all android tools, tagging & splitup
+* use container to build DrawnTogether
+
 
 
